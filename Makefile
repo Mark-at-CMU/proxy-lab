@@ -6,18 +6,16 @@
 # Makefile to build your proxy from sources.
 #
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -O2 -Wall -I .
 LDFLAGS = -lpthread
 
 all: proxy
-
-csapp.o: csapp.c csapp.h
+proxy: proxy.o csapp.o
+	$(CC) $(CFLAGS) -o proxy proxy.c csapp.o $(LDFLAGS)
+csapp.o: csapp.c
 	$(CC) $(CFLAGS) -c csapp.c
 
-proxy.o: proxy.c csapp.h
-	$(CC) $(CFLAGS) -c proxy.c
 
-proxy: proxy.o csapp.o
 
 # Creates a tarball in ../proxylab-handin.tar that you should then
 # hand in to Autolab. DO NOT MODIFY THIS!
